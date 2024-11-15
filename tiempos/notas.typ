@@ -11,6 +11,13 @@
 - el mejor escenario $<-$ utilizado nunca jaja
 - el escenario promedio $<-$ utilizado cuando hay múltiples ejecuciones en distintas instancias
 
+=== El mejor y el peor caso 
+Bueno, primero se refier a los algoritmos. El mejor caso de un loop es aquel en el que no se ejecuta, o se ejecuta una sóla vez, o un número constante de veces. O sea, que no dependa del tamaño de la entrada. El peor caso de un loop es en el que se recorre por completo.
+
+La idea es, para cada caso, encontrar una asíntota que nos permita entender el costo de computarla. Puede ser "su menor costo", "su mayor costo", o su complejidad (si el menor y el mayor costo son el mismo). Esto serían las notaciones Big O, $Omega$ y $Theta$, respectivamente
+
+=== Escenario promedio
+
 Para el escenario promedio, en un algoritmo que requieren $n$ elementos, se deben tomar en consideración $n!$ combinaciones posibles.
 
 El mal viaje de esta medición es que, en casos dónde buscamos ordenar una lista, si está parcialmente ordenada no te sirve cómo vara para medir que pasa, pues toma el promedio de las $n!$ combinaciones posibles, y acá no hay ningúna distribución normal, sino que, justamente, puede haber una mayoría de listas parcialmente ordenadas. Bueno, para más data repasar media-mediana-moda y campana de Gauss.
@@ -47,13 +54,13 @@ Decimos que Big $O(f(n))$ es el conjunto de todas las funciones que cumplen $t:N
 $
 O(f(n))={
   t:NN->RR^(>=0)|
-  (exists c in RR^+)(forall n in NN)[t(n)<=c dot t(n)]
+  (exists c in RR^+)(forall^(oo) " " n in NN)[t(n)<=c dot t(n)]
 }
 $
 
 Notemos que, además de esto, cómo $O(f(n))$ es el análisis asintótico de una función $NN->RR^+$, podemos agregar un umbral, un 'límite' a partir del cual una función sea mayor que otra, y por lo tanto, también pertenezca a $O(f(n))$. Por ejemplo
 
-$n^3-3n^2-n-8 in O(n^3)$, aunque si $n<=3 => t(n)<0$. Podemos expandir nuestra definición para incluir este comportamiento
+$n^3-3n^2-n-8 in O(n^3)$, aunque si $n<=3 => t(n)<0$. La notación $(forall^(oo) n in NN)$ hace referencia justamente a esto. Traduciendo a una lógica proposicional, nos quedaría así:
 
 $
 O(f(n))={
@@ -125,13 +132,17 @@ No entendí ni madres, pero la conclusión se parece mucho al principio de invar
 
 Esto no vale para $log_(f(n))(n)$, ni para $k^(log(n))$, ni ninguna variante rara. Tampoco para $a,b<1$
 
+==== Reflexividad
+Bueno, bastante trivial
+- $f(n) in O(f(n))$
+
+Demostrarlo es facilon perreque: $f(n) < k f(n), forall n in NN and forall k > 1$
+
 ==== Transitividad
 Sean $f,g,h: NN -> RR^+$, si
 - $f(n) in O(g(n))$
 - $g(n) in O(g(n))$
 Entonces $f(n) in O(g(n))$
-
-#emph(text(green)[dice que tembién es "reflexiva" ¡ma perché!])
 
 ==== Demostrar que no pertecene
 Se hace por contradicción, no lo voy a estudiar de no ser necesario. En el primer capítulo hay un resúmen de cómo hacer estas demos.
@@ -155,7 +166,7 @@ $
 
 ==== Particularidades
 
-No entendí ni madres, en el libro página 86 explican algo, pero tiene toda la pinta de que se entiende mejor con ejercicios y ejemplos concretos. Por ahora, hay que pensarlo cómo "el límite inferior", o mejor dícho, "el mejor de los casos" de una ejecución.
+No entendí ni madres, en el libro página 86 explican algo, pero tiene toda la pinta de que se entiende mejor con ejercicios y ejemplos concretos. La idea es que es la cota inferior de una ejecución.
 
 === Notación Theta
 
