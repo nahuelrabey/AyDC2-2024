@@ -1,5 +1,4 @@
 #import "@preview/lovelace:0.3.0": *
-#let colMath(x, color) = text(fill: color)[$#x$]
 #let spc = $""$
 #let cmmt = $triangle.r$
 
