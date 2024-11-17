@@ -33,8 +33,28 @@ Me aburrí, lo seguiré mañana
         + $(forall e: "int")("pertenece"(e,n."der") ->_L e > n."val")$
       + )
     + }
-    + pred InvRep(c: ConjuntoABB){
-      + 
+    + pred #text(fill:green)[InvRep] (c: ConjuntoABB){
+      + $"esArbolBinario"(c.root) and_L "esABB"(c.root)$
     + }
+    + pred #text(fill: green)[Abs] (c: ConjuntoABB, c': Conjunto){
+      + $(forall e: T)("pertenece(e,c.root)" <->_L e in c'."set")$
+    + }
+    + proc agregar(inout n: Nodo, in e: int):
+      + *if* n == Nil:
+        + n = *new* Nodo()
+        + n.izq = Nil
+        + n.der = Nil
+        + n.value = e
+        + *return*
+      + #spc
+      + *if* e <= n.value:
+        + agregar(n.izq, e)
+      + *else*:
+        + agregar(n.der, e)
+      + #spc
+      + *return*
+    + proc quitar(inout n:Nodo, in e: int):
+      + actual: Nodo = n
+      + *while* actual != Nil && actual.val != 
   + }
 ]
