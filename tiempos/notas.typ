@@ -3,6 +3,8 @@
     numbering: "(1)",
     content,
 )
+#import "@preview/ouset:0.2.0": overset
+#let almost_one = $overset(forall, oo)$
 
 == Tiempos de ejecución
 (Agregar el principio de invariancia)
@@ -54,7 +56,7 @@ Decimos que Big $O(f(n))$ es el conjunto de todas las funciones que cumplen $t:N
 $
 O(f(n))={
   t:NN->RR^(>=0)|
-  (exists c in RR^+)(forall^(oo) " " n in NN)[t(n)<=c dot t(n)]
+  (exists c in RR^+)(#almost_one " " n in NN)[t(n)<=c dot t(n)]
 }
 $
 
