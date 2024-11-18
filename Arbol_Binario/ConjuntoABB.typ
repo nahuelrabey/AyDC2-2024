@@ -1,6 +1,6 @@
 #import "@preview/lovelace:0.3.0": *
 #let spc = $""$
-#let cmmt = $triangle.r$
+#let cmnt = $triangle.r$
 
 === Arbol Binario de Búsqueda - Rabey
 
@@ -39,7 +39,10 @@ Me aburrí, lo seguiré mañana
     + pred #text(fill: green)[Abs] (c: ConjuntoABB, c': Conjunto){
       + $(forall e: T)("pertenece(e,c.root)" <->_L e in c'."set")$
     + }
-    + proc agregar(inout n: Nodo, in e: int):
+    + proc new():
+      + res.root = Nil
+      + *return* res
+    + proc agregarRecursivo(inout n: Nodo, in e: int):
       + *if* n == Nil:
         + n = *new* Nodo()
         + n.izq = Nil
@@ -48,13 +51,35 @@ Me aburrí, lo seguiré mañana
         + *return*
       + #spc
       + *if* e <= n.value:
-        + agregar(n.izq, e)
+        + agregarRecursivo(n.izq, e)
       + *else*:
-        + agregar(n.der, e)
+        + agregarRecursivo(n.der, e)
       + #spc
       + *return*
+    + proc agregarIterado(inout c: ConjuntoABB, in e: int):
+      + *if* (c.root = Nil):
+        + n = new Nodo
+        + n.value =  e
+        + *return*
+      + actual = c.root
+      + #cmnt cuando encuentre el nodo dónde agruegue el valor, ese nodo pasará a tener el mismo valor que estoy buscando. Esta propiedad será la guarda del bucle.
+      + *while* actual.value != value:
+        + *if* e < actual.value:
+          + *if* actual.izq = Nil:
+            + actual.izq = new Nodo
+            + actual.izq.value = e
+          + actual = actual.izq
+
+        + *if* e > actual.value:
+          + *if* actual.der = Nil:
+            + actual.der = new Nodo
+            + actual.der.value = e
+          + actual = actual.der
+      + *return*
+      
     + proc quitar(inout n:Nodo, in e: int):
+      + requiere{ pertenece(e, n) }
       + actual: Nodo = n
-      + *while* actual != Nil && actual.val != 
+      + *while* True:
   + }
 ]
